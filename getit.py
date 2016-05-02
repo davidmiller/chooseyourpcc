@@ -4,7 +4,8 @@ Scraper for PCC data
 import csv
 import sys
 
-from lxml.html import fromstring
+import html2text
+from lxml.html import fromstring, tostring
 import requests
 
 areas = [
@@ -96,7 +97,9 @@ def candidate_dict_from_url(url):
         if i != party_image:
             face_image = i
 
-    chat = u"\n".join([e.text_content() for e in tree.cssselect('.col-md-9 p,.col-md-9 ul')])
+    chat = html2text.html2text(
+        '\n'.join([tostring(e) for e in tree.cssselect('.col-md-9 p,.col-md-9 ul')])
+    )
     chat = chat.encode('utf-8')
 
     return dict(

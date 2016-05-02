@@ -96,7 +96,7 @@ def candidate_dict_from_url(url):
         if i != party_image:
             face_image = i
 
-    chat = u"\n".join([e.text_content() for e in tree.cssselect('.col-md-9 p')])
+    chat = u"\n".join([e.text_content() for e in tree.cssselect('.col-md-9 p,.col-md-9 ul')])
     chat = chat.encode('utf-8')
 
     return dict(
